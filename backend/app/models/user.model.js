@@ -6,6 +6,16 @@ const User = mongoose.model(
     username: String,
     email: String,
     password: String,
+    phoneNumber: {
+      type: String,
+    validate: {
+      validator: function(v) {
+        return /\d{10}/.test(v);
+      },
+      message: props => `${props.value} is not a valid phone number!`
+    },
+    required: [true, 'User phone number required']
+  },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
