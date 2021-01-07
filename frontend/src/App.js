@@ -19,6 +19,13 @@ import { clearMessage } from "./actions/message";
 
 import { history } from "./helpers/history";
 
+const SamplePizza = {
+  name: "Мафія",
+  photoURL: "https://media.dominos.ua/__sized__/menu/product_osg_image_category/2020/12/28/Vetchina_i_griby_-thumbnail-960x960-70.jpg",
+  ingredients: ["cheese_1", "cheese_2", "cheese_3", "cheese_4"],
+  variants: ["small", 150, 400]
+}
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -132,7 +139,7 @@ class App extends Component {
               <Route path="/user" component={BoardUser} />
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} />
-              <Route path="/pizzaCard" component={PizzaCard} />
+              <Route path="/pizzaCard" component={() => <PizzaCard {...SamplePizza}/>} />
             </Switch>
           </div>
         </div>
