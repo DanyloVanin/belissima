@@ -3,6 +3,11 @@ label {
   margin-top: 10px;
 }
 
+.kek {
+  max-width: 500px;
+  background: 'linear-gradient(45deg,  #FE6B8B 30%, #FF8E53 90%)',
+}
+
 .card-container.card {
   max-width: 350px !important;
   padding: 40px 40px;
