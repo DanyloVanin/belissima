@@ -16,7 +16,7 @@ import BoardAdmin from "./components/board-admin.component";
 import { logout } from "./actions/auth";
 import { clearMessage } from "./actions/message";
 
-import { history } from './helpers/history';
+import { history } from "./helpers/history";
 
 class App extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ class App extends Component {
         <div>
           <nav className="navbar navbar-expand navbar-dark bg-dark">
             <Link to={"/"} className="navbar-brand">
-              bezKoder
+              Belissima Pizza
             </Link>
             <div className="navbar-nav mr-auto">
               <li className="nav-item">
@@ -121,7 +121,7 @@ class App extends Component {
               </div>
             )}
           </nav>
-
+            
           <div className="container mt-3">
             <Switch>
               <Route exact path={["/", "/home"]} component={Home} />

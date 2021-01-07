@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import { isEmail } from "validator";
-
 import { connect } from "react-redux";
 import { register } from "../actions/auth";
 
@@ -54,11 +55,13 @@ class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
 
     this.state = {
       username: "",
       email: "",
       password: "",
+      phoneNumber: "",
       successful: false,
     };
   }
@@ -81,6 +84,12 @@ class Register extends Component {
     });
   }
 
+  onChangePhoneNumber(e) {
+    this.setState({
+      phoneNumber: e,
+    });
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -93,7 +102,12 @@ class Register extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       this.props
         .dispatch(
-          register(this.state.username, this.state.email, this.state.password)
+          register(
+            this.state.username,
+            this.state.email,
+            this.state.password,
+            this.state.phoneNumber
+          )
         )
         .then(() => {
           this.setState({
@@ -110,6 +124,18 @@ class Register extends Component {
 
   render() {
     const { message } = this.props;
+    const phoneNumberErrorMessage = () => {
+      if (
+        this.state.phoneNumber &&
+        !isPossiblePhoneNumber(this.state.phoneNumber)
+      ) {
+        return (
+          <div className="alert alert-danger" role="alert">
+            This is not a valid phone number.
+          </div>
+        );
+      }
+    };
 
     return (
       <div className="col-md-12">
@@ -165,6 +191,18 @@ class Register extends Component {
                 </div>
 
                 <div className="form-group">
+                  <label htmlFor="tel">Phone</label>
+                  <PhoneInput
+                    defaultCountry="UA"
+                    value={this.state.phoneNumber}
+                    onChange={this.onChangePhoneNumber}
+                    limitMaxLength={true}
+                    numberInputProps={{ className: "form-control" }}
+                  />
+                  {phoneNumberErrorMessage()}
+                </div>
+
+                <div className="form-group">
                   <button className="btn btn-primary btn-block">Sign Up</button>
                 </div>
               </div>
@@ -172,7 +210,14 @@ class Register extends Component {
 
             {message && (
               <div className="form-group">
-                <div className={ this.state.successful ? "alert alert-success" : "alert alert-danger" } role="alert">
+                <div
+                  className={
+                    this.state.successful
+                      ? "alert alert-success"
+                      : "alert alert-danger"
+                  }
+                  role="alert"
+                >
                   {message}
                 </div>
               </div>
