@@ -83,10 +83,13 @@ exports.createPizza = (req, res) => {
       message: "Request body cannot be empty",
     });
   }
+
   const pizza = new Pizza({
     name: req.body.name,
     photoUrl: req.body.photoUrl,
     onSale: req.body.onSale,
+    pizzaVariant: req.body.pizzaVariant,
+    ingredients: req.body.ingredients
   });
 
   pizza
