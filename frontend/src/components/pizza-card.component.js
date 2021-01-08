@@ -28,8 +28,9 @@ const StyledButton = withStyles({
 
 export default class PizzaCard extends Component {
   constructor(props) {
+    console.log('props' + JSON.stringify(props));
     super(props);
-
+  
     this.state = {
       actual: "kek", //this.props.variants[0]
     };
