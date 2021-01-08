@@ -1,14 +1,18 @@
 const mongoose = require("mongoose");
 
-const IngredientsSchema = new mongoose.Schema({
+/*const IngredientsSchema = mongoose.model(
+"Ingredient",
+new mongoose.Schema({
   name: String,
   photoURL: {
     type: String,
     default: "https://api.thecatapi.com/v1/images/search",
   },
-});
+}));
 
-const VariantsSchema = new mongoose.Schema({
+const VariantsSchema = mongoose.model( 
+  "pizzaVariant",
+  new mongoose.Schema({
   size: {
     type: String,
     enum: ['small', 'medium', 'big'],
@@ -16,7 +20,7 @@ const VariantsSchema = new mongoose.Schema({
   },
   price: Number,
   wage: Number,
-});
+}));*/
 
 const Pizza = mongoose.model(
   "Pizza",
@@ -26,8 +30,8 @@ const Pizza = mongoose.model(
       type: String,
       default: "https://picsum.photos/200",
     },
-    //pizzaVariant: [VariantsSchema],
-    //ingredients: [IngredientsSchema],
+    pizzaVariant: [{size: String, price: Number, wage: Number}],
+    ingredients: [{_id: false, name: String, photoURL: String}],
     onSale: {
       type: Boolean,
       default: false,

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React, { Component } from "react";
+import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -13,16 +13,17 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 
 const StyledButton = withStyles({
   root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-    borderRadius: 3,
+    background: "linear-gradient(45deg, #FF0000 30%, #FF8E53 90%)",
+    borderRadius: 15,
     border: 0,
-    color: 'white',
+    color: "white",
     height: 48,
-    padding: '0 30px',
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    padding: "0 30px",
+    boxShadow: "0 3px 5px 4px rgba(255, 105, 135, .3)",
   },
   label: {
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
+    fontSize: "16px",
   },
 })(Button);
 
@@ -32,15 +33,21 @@ export default class PizzaCard extends Component {
     super(props);
   
     this.state = {
-      actual: "kek", //this.props.variants[0]
+      actual: "", //this.props.variants[0]
     };
   }
 
   render() {
     return (
-      <Card className="kek">
+      <Card
+        style={{
+          maxWidth: 345,
+          boxShadow: "0 3px 5px 2px rgba(0,0,0,0.3)",
+          borderRadius: 15,
+        }}
+      >
         <CardActionArea>
-          <CardMedia component="img" src={this.props.photoURL} height="240" />
+          <CardMedia component="img" src={this.props.photoURL} />
           <CardContent>
             <Typography gutterBottom variant="h5">
               {this.props.name}
@@ -51,9 +58,6 @@ export default class PizzaCard extends Component {
             <Typography gutterBottom variant="subtitle2" color="textSecondary">
               {this.props.ingredients.join(", ")}
             </Typography>
-            <Typography variant="subtitle1">
-              {this.props.variants[1] + " uah"}
-            </Typography>
           </CardContent>
         </CardActionArea>
         <CardActions>
@@ -63,11 +67,20 @@ export default class PizzaCard extends Component {
             onClick={() => {
               alert("clicked");
             }}
-            size="LARGE"
+            size="large"
           >
             {<ShoppingCartIcon />}
             To Cart
           </StyledButton>
+          <Typography
+            style={{
+              fontSize: "20px",
+              margin: "0 0 0 5em",
+              fontWeight: "bold"
+            }}
+          >
+            {this.props.variants[1] + " грн"}
+          </Typography>
         </CardActions>
       </Card>
     );
