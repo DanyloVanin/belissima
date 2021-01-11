@@ -20,18 +20,35 @@ export default class PizzaList extends Component {
           this.setState({ dataIsReturned: true });
         })
         .catch((err) => console.log(err));
-    }, 1500);
+    }, 2500);
   }
 
   render() {
     if (this.state.dataIsReturned) {
       const pizzaList = this.state.pizzas;
+      const pizzaCards = pizzaList.map((pizza) => {
+        return (
+          <PizzaCard
+            key={pizza._id}
+            {...{
+              key: pizza._id,
+              name: pizza.name,
+              variants: pizza.pizzaVariant,
+              ingredients: pizza.ingredients,
+              photoURL: pizza.photoUrl,
+              onSale: pizza.onSale,
+            }}
+          />
+        );
+      });
 
       return (
-        <div>
-          {pizzaList.map((pizza) => {
-            return <PizzaCard {...pizza}/>;
-          })}
+        <div className="container">
+          <div className="row">
+            {
+            pizzaCards.map(card => card)
+            }
+          </div>
         </div>
       );
     } else {

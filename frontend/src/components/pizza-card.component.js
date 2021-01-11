@@ -29,11 +29,11 @@ const StyledButton = withStyles({
 
 export default class PizzaCard extends Component {
   constructor(props) {
-    console.log('props' + JSON.stringify(props));
+    console.log('props:' + JSON.stringify(props));
     super(props);
   
     this.state = {
-      actual: "", //this.props.variants[0]
+      currentVariant: 0
     };
   }
 
@@ -44,6 +44,7 @@ export default class PizzaCard extends Component {
           maxWidth: 345,
           boxShadow: "0 3px 5px 2px rgba(0,0,0,0.3)",
           borderRadius: 15,
+          margin: 15
         }}
       >
         <CardActionArea>
@@ -53,10 +54,10 @@ export default class PizzaCard extends Component {
               {this.props.name}
             </Typography>
             <Typography gutterBottom variant="subtitle2" color="textSecondary">
-              {this.props.variants[2] + " г"}
+              {this.props.variants[this.state.currentVariant].wage + " г"}
             </Typography>
             <Typography gutterBottom variant="subtitle2" color="textSecondary">
-              {this.props.ingredients.join(", ")}
+              {this.props.ingredients.map(ingredient => ingredient.name).join(", ")}
             </Typography>
           </CardContent>
         </CardActionArea>
@@ -79,7 +80,7 @@ export default class PizzaCard extends Component {
               fontWeight: "bold"
             }}
           >
-            {this.props.variants[1] + " грн"}
+            {this.props.variants[this.state.currentVariant].price + " грн"}
           </Typography>
         </CardActions>
       </Card>
